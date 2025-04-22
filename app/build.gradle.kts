@@ -1,7 +1,18 @@
+import java.util.Properties
+
 plugins {
   alias(libs.plugins.android.application)
   alias(libs.plugins.kotlin.android)
   alias(libs.plugins.kotlin.compose)
+}
+
+val secretsFile = rootProject.file("secrets.properties")
+val secrets = Properties()
+
+if (secretsFile.exists()) {
+  secrets.load(secretsFile.inputStream())
+} else {
+  throw GradleException("The secrets.properties file was not found. Create one in the root of the project.")
 }
 
 android {
@@ -16,6 +27,7 @@ android {
     versionName = "1.0"
 
     testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+    resValue("string", "google_api_key", secrets["GOOGLE_API_KEY"] as String)
   }
 
   buildTypes {
