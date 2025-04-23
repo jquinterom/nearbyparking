@@ -5,7 +5,7 @@ import androidx.lifecycle.viewModelScope
 import co.mrcomondev.pro.nearby_parking.database.PARKING_SPOTS
 import co.mrcomondev.pro.nearby_parking.model.ParkingSpot
 import co.mrcomondev.pro.nearby_parking.utils.constants
-import co.mrcomondev.pro.nearby_parking.utils.distanceTo
+import co.mrcomondev.pro.nearby_parking.utils.getDistanceTo.distanceTo
 import com.google.android.gms.maps.model.LatLng
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
