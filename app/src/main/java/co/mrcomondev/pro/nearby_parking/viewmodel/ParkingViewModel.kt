@@ -39,6 +39,7 @@ class ParkingViewModel : ViewModel() {
 
   fun updateUserLocation(latLng: LatLng) {
     _userLocation.value = latLng
+    filterParkingByUserLocation()
   }
 
   fun updateSearchRadius(radius: Double) {
@@ -51,7 +52,6 @@ class ParkingViewModel : ViewModel() {
     var latDistance = 0.0025
     var lngDistance = 0.0035
 
-
     for (i in 0..15) {
       val randomLat = Random.nextDouble(-0.0045, 0.0045) + latDistance
       val randomLong = Random.nextDouble(-0.0045, 0.0055) + lngDistance
@@ -62,7 +62,7 @@ class ParkingViewModel : ViewModel() {
       val newLongitude =
         if (isFree) userLocation.longitude + randomLong else userLocation.longitude - randomLong
 
-      val newPoint1 = ParkingSpot(
+      val newPoint = ParkingSpot(
         id = i.toString(),
         name = "Nearby Parking $i",
         lat = newLatitude,
@@ -72,7 +72,7 @@ class ParkingViewModel : ViewModel() {
       )
 
       _parkingSpots.update { currentList ->
-        currentList + newPoint1
+        currentList + newPoint
       }
     }
   }
